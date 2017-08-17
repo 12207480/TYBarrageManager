@@ -62,6 +62,7 @@
 - (void)setMaxNumOfLines:(NSUInteger)maxNumOfLines
 {
     _maxNumOfLines = maxNumOfLines;
+    
     _maxTextHeight = ceil(self.font.lineHeight * maxNumOfLines + self.textContainerInset.top + self.textContainerInset.bottom);
 }
 

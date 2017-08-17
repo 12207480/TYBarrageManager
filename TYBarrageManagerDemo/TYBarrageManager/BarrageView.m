@@ -124,6 +124,10 @@
         [self prepareBarrage];
     }
     
+    if (_state == BarrageStateStoped) {
+        return;
+    }
+    
     NSDictionary *priorityBarrages = [self priorityBarrageDictionaryWithDatas:barrageDatas];
     
     for (BarrageRenderView *renderView in _renderViews) {

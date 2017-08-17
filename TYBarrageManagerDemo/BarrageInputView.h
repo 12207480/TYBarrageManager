@@ -12,7 +12,8 @@
 @class BarrageInputView;
 @protocol BarrageInputViewDelegate <NSObject>
 
-- (void)barrageInputView:(BarrageInputView *)barrageInputView DidSendText:(NSString *)text;
+// 发送信息
+- (void)barrageInputView:(BarrageInputView *)barrageInputView didSendedMessage:(NSString *)message;
 
 @end
 

@@ -15,6 +15,7 @@ typedef NS_ENUM(NSUInteger, BarragePriority) {
     BarragePriorityHigh
 };
 
+// 弹幕cell 状态
 typedef NS_ENUM(NSUInteger, BarrageViewCellState) {
     BarrageViewCellStateWaiting,
     BarrageViewCellStateAnimationing,
@@ -24,24 +25,29 @@ typedef NS_ENUM(NSUInteger, BarrageViewCellState) {
 
 @interface BarrageViewCell : UIView
 
-// 需要赋值
-
+// configure
+// id
 @property (nonatomic, strong) NSString *identifier;
 
+// 弹幕大小
 @property (nonatomic, assign) CGSize renderSize;
 
+// 弹幕速度
 @property (nonatomic, assign) CGFloat renderSpeed;
 
+// 弹幕是否能点击
 @property (nonatomic, assign) BOOL singleTapEnable;
 
 // readonly
-
+// 弹幕状态
 @property (nonatomic, assign, readonly) BarrageViewCellState state;
 
+// 弹幕优先级
 @property (nonatomic, assign, readonly) BarragePriority priority;
-
+// 弹幕轨道
 @property (nonatomic, assign, readonly) NSInteger renderChannel;
 
+// 弹幕当前render framw
 - (CGRect)renderFrame;
 
 - (void)animationBarrage;

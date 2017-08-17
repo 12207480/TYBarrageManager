@@ -63,6 +63,7 @@
     textView.clipsToBounds = YES;
     textView.growingTextDelegate = self;
     textView.delegate = self;
+    textView.keyboardAppearance = UIKeyboardAppearanceDark;
     textView.placeHolderEdge = UIEdgeInsetsMake(0, 10, 0, 0);
     textView.placeHolderLabel.text = @"在此输入想法";
     textView.placeHolderLabel.font = [UIFont systemFontOfSize:16];
@@ -111,8 +112,8 @@
 {
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
-        if ([_delegate respondsToSelector:@selector(barrageInputView:DidSendText:)]) {
-            [_delegate barrageInputView:self DidSendText:textView.text];
+        if ([_delegate respondsToSelector:@selector(barrageInputView:didSendedMessage:)]) {
+            [_delegate barrageInputView:self didSendedMessage:textView.text];
         }
         return NO;
     }

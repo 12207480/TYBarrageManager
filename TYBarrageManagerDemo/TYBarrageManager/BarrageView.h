@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BarrageRenderView.h"
 
+// 弹幕状态
 typedef NS_ENUM(NSUInteger, BarrageState) {
     BarrageStateUnPrepare,
     BarrageStateWaiting,
@@ -19,13 +20,14 @@ typedef NS_ENUM(NSUInteger, BarrageState) {
 
 @class BarrageView;
 @protocol BarrageViewDataSource <NSObject>
-
+// 弹幕 cell
 - (BarrageViewCell *)barrageView:(BarrageView *)barrageView cellForBarrageData:(id)barrageData;
 
 @optional
 
+// 弹幕设置
 - (void)barrageView:(BarrageView *)barrageView configureBarrageRenderView:(BarrageRenderView *)barrageRenderView priority:(BarragePriority)priority;
-
+// 弹幕优先级
 - (BarragePriority)barragePriorityWithData:(id)barrageData;
 
 @end
@@ -41,18 +43,25 @@ typedef NS_ENUM(NSUInteger, BarrageState) {
 
 @property (nonatomic, weak) id<BarrageViewDataSource> dataSource;
 
+// 弹幕优先级层
 - (BarrageRenderView *)renderViewWithPriority:(BarragePriority)priority;
 
+// 准备弹幕
 - (void)prepareBarrage;
 
+// 发送弹幕
 - (void)sendBarrageDatas:(NSArray *)barrageDatas;
 
+// 恢复
 - (void)resume;
 
+// 暂停
 - (void)pause;
 
+// 重新开始
 - (void)restart;
 
+// 停止
 - (void)stop;
 
 @end
