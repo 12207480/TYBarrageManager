@@ -145,8 +145,6 @@
 		2B60B48F1DED5A2A002141FC /* TYBarrageManager */ = {
 			isa = PBXGroup;
 			children = (
-				2B3A72931F452E5100EAFAC1 /* GrowingTextView.h */,
-				2B3A72941F452E5100EAFAC1 /* GrowingTextView.m */,
 				2B60B49C1DED5B08002141FC /* BarrageView.h */,
 				2B60B49D1DED5B08002141FC /* BarrageView.m */,
 				2B60B4A51DED6EF5002141FC /* BarrageRenderView.h */,
@@ -155,6 +153,8 @@
 				2B60B4A01DED5B2F002141FC /* BarrageViewCell.m */,
 				2B4A5C911DF1076900394B7B /* WeakProxy.h */,
 				2B4A5C921DF1076900394B7B /* WeakProxy.m */,
+				2B3A72931F452E5100EAFAC1 /* GrowingTextView.h */,
+				2B3A72941F452E5100EAFAC1 /* GrowingTextView.m */,
 			);
 			path = TYBarrageManager;
 			sourceTree = "<group>";

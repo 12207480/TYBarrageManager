@@ -79,7 +79,7 @@
 - (void)setDataSource:(id<BarrageViewDataSource>)dataSource {
     _dataSource = dataSource;
     _dataSourceFlags.barragePriorityWithData = [dataSource respondsToSelector:@selector(barragePriorityWithData:)];
-    _dataSourceFlags.configureBarrageRenderView = [dataSource respondsToSelector:@selector(barrageView:configureBarrageRenderView:priority:)];
+    _dataSourceFlags.configureBarrageRenderView = [dataSource respondsToSelector:@selector(barrageView:configureBarrageRenderView:)];
 }
 
 - (BarrageRenderView *)renderViewWithPriority:(BarragePriority)priority {
@@ -98,7 +98,7 @@
     
     for (BarrageRenderView *renderView in _renderViews) {
         if (_dataSourceFlags.configureBarrageRenderView) {
-            [_dataSource barrageView:self configureBarrageRenderView:renderView priority:renderView.priority];
+            [_dataSource barrageView:self configureBarrageRenderView:renderView];
         }
         [renderView prepareRenderBarrage];
     }
@@ -124,7 +124,7 @@
         }
     }
     
-    [self startTimerIfNeed];
+    [self startTimer];
 }
 
 - (void)renderBarrage {
@@ -141,13 +141,13 @@
     }
     
     if (!haveBarrageDatas) {
-        [self clearTimer];
+        [self stopTimer];
         _state = BarrageStateWaiting;
     }
 }
 
 - (void)clearBarrage {
-    [self clearTimer];
+    [self stopTimer];
     for (BarrageRenderView *renderView in _renderViews) {
         [renderView clearBarrage];
     }
@@ -166,12 +166,12 @@
     for (BarrageRenderView *renderView in _renderViews) {
         [renderView resume];
     }
-    [self startTimerIfNeed];
+    [self startTimer];
 }
 
 - (void)pause {
     _state = BarrageStatePauseing;
-    [self clearTimer];
+    [self stopTimer];
     for (BarrageRenderView *renderView in _renderViews) {
         [renderView pause];
     }
@@ -181,15 +181,13 @@
     if (_state == BarrageStateRendering || _state == BarrageStatePauseing) {
         [self clearBarrage];
     }
-    
     _state = BarrageStateUnPrepare;
-    
     [self prepareBarrage];
 }
 
 - (void)stop {
     _state = BarrageStateStoped;
-    [self clearTimer];
+    [self stopTimer];
     for (BarrageRenderView *renderView in _renderViews) {
         [renderView stop];
     }
@@ -215,7 +213,7 @@
     return priorityBarrages;
 }
 
-- (void)startTimerIfNeed {
+- (void)startTimer {
     if (!_timer) {
         WeakProxy *proxy = [WeakProxy proxyWithTarget:self];
         _timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval target:proxy selector:@selector(renderBarrage) userInfo:nil repeats:YES];
@@ -223,7 +221,7 @@
     }
 }
 
-- (void)clearTimer {
+- (void)stopTimer {
     if ([_timer isValid]) {
         [_timer invalidate];
         _timer = nil;

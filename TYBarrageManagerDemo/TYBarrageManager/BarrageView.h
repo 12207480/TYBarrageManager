@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, BarrageState) {
 
 @optional
 // 弹幕设置
-- (void)barrageView:(BarrageView *)barrageView configureBarrageRenderView:(BarrageRenderView *)barrageRenderView priority:(BarragePriority)priority;
+- (void)barrageView:(BarrageView *)barrageView configureBarrageRenderView:(BarrageRenderView *)renderView;
 
 // 弹幕优先级
 - (BarragePriority)barragePriorityWithData:(id)barrageData;
