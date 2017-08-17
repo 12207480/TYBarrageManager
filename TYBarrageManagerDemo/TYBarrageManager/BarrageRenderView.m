@@ -17,7 +17,7 @@
 
 @interface BarrageViewCell ()
 
-@property (nonatomic, assign) BarrageViewCellState state;
+@property (nonatomic, assign) BarrageViewCellRenderState state;
 
 @property (nonatomic, assign) BarragePriority priority;
 
@@ -142,7 +142,7 @@
     }
     
     BarrageViewCell *cell = [self.barrageView cellForBarrageData:barrageData];
-    cell.state = BarrageViewCellStateWaiting;
+    cell.state = BarrageViewCellRenderStateWaiting;
     cell.renderChannel = channel;
     cell.priority = self.priority;
     cell.frame = CGRectMake(CGRectGetWidth(self.frame), _firstChannelTopEdge+channel*self.channelHeight+(self.channelHeight-cell.renderSize.height)/2, cell.renderSize.width, cell.renderSize.height);
@@ -238,15 +238,27 @@
         return YES;
     }
     
-    if (cell.state == BarrageViewCellStateWaiting || cell.state == BarrageViewCellStateFinished) {
+    if (cell.state == BarrageViewCellRenderStateWaiting || cell.state == BarrageViewCellRenderStateFinished) {
         return YES;
     }
     
-    if ((cell.state == BarrageViewCellStateAnimationing || cell.state == BarrageViewCellStatePauseing) && cell.renderChannel == channel && CGRectGetMaxX([cell renderFrame]) < CGRectGetWidth(self.frame)) {
+    if ((cell.state == BarrageViewCellRenderStateAnimationing || cell.state == BarrageViewCellRenderStatePauseing) && cell.renderChannel == channel && CGRectGetMaxX([cell renderFrame]) < CGRectGetWidth(self.frame)) {
         return YES;
     }
     return NO;
 
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    __block UIView *hitView = nil;
+    [self.subviews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(UIView *subView, NSUInteger idx, BOOL * stop) {
+        CALayer *layer = subView.layer.presentationLayer; //图片的显示层
+        if(CGRectContainsPoint(layer.frame, point)){ //触摸点在显示层中，返回当前图片
+            hitView = subView;
+            *stop = YES;
+        }
+    }];
+    return hitView;
 }
 
 @end

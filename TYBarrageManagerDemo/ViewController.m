@@ -11,7 +11,7 @@
 #import "BarrageLabelCell.h"
 #import "BarrageData.h"
 
-@interface ViewController ()<BarrageViewDataSource>
+@interface ViewController ()<BarrageViewDataSource, BarrageViewDelegate>
 
 @property (nonatomic, weak) BarrageView *barrageView;
 
@@ -42,6 +42,7 @@
     barrageView.timeInterval = 0.5;
     barrageView.backgroundColor = [UIColor colorWithRed:50/255. green:180/255. blue:255/255. alpha:1];
     barrageView.dataSource = self;
+    barrageView.delegate = self;
     [self.view addSubview:barrageView];
     _barrageView = barrageView;
 }
@@ -56,7 +57,6 @@
 
 - (void)loadData
 {
-    
     NSMutableArray *array = [NSMutableArray array];
     for (int i = 0; i < arc4random_uniform(16); ++i) {
         BarrageData *data = [[BarrageData alloc]init];
@@ -126,6 +126,10 @@
     CGRect frame = [text boundingRectWithSize:size options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{ NSFontAttributeName:font } context:nil];
     textSize = CGSizeMake(frame.size.width, frame.size.height + 1);
     return textSize;
+}
+
+- (void)barrageView:(BarrageView *)barrageView didClickedBarrageCell:(BarrageViewCell *)BarrageCell {
+    NSLog(@"BarrageViewCell %@",BarrageCell);
 }
 
 - (void)didReceiveMemoryWarning {

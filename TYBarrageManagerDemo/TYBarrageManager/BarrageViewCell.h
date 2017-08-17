@@ -15,46 +15,40 @@ typedef NS_ENUM(NSUInteger, BarragePriority) {
     BarragePriorityHigh
 };
 
-// 弹幕cell 状态
-typedef NS_ENUM(NSUInteger, BarrageViewCellState) {
-    BarrageViewCellStateWaiting,
-    BarrageViewCellStateAnimationing,
-    BarrageViewCellStatePauseing,
-    BarrageViewCellStateFinished,
+// 弹幕cell渲染状态
+typedef NS_ENUM(NSUInteger, BarrageViewCellRenderState) {
+    BarrageViewCellRenderStateWaiting,      // 等待渲染
+    BarrageViewCellRenderStateAnimationing, // 渲染动画中
+    BarrageViewCellRenderStatePauseing,     // 暂停
+    BarrageViewCellRenderStateFinished,     // 完成
 };
 
+// 弹幕cell
 @interface BarrageViewCell : UIView
 
 // identifier
 @property (nonatomic, strong) NSString *identifier;
-
 // 弹幕大小
 @property (nonatomic, assign) CGSize renderSize;
-
 // 弹幕速度
 @property (nonatomic, assign) CGFloat renderSpeed;
 
-// 弹幕是否能点击
-@property (nonatomic, assign) BOOL singleTapEnable;
-
-// readonly
 // 弹幕状态
-@property (nonatomic, assign, readonly) BarrageViewCellState state;
-
+@property (nonatomic, assign, readonly) BarrageViewCellRenderState state;
 // 弹幕优先级
 @property (nonatomic, assign, readonly) BarragePriority priority;
 // 弹幕轨道
 @property (nonatomic, assign, readonly) NSInteger renderChannel;
+// 弹幕位置
+@property (nonatomic, assign ,readonly) CGRect renderFrame;
 
-// 弹幕当前render‘s frame
-- (CGRect)renderFrame;
-
+// 开始弹幕cell动画
 - (void)startBarrage;
-
+// 移除弹幕cell
 - (void)removeBarrage;
-
+// 暂停
 - (void)pauseBarrage;
-
+// 恢复动画
 - (void)resumeBarrage;
 
 @end

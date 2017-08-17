@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BarrageViewCell.h"
 
+// 渲染层
 @interface BarrageRenderView : UIView
 
 // 渲染层优先级，高的在前面
@@ -54,7 +55,6 @@
  清除渲染数据
  */
 - (void)clearBarrage;
-
 
 - (void)resume;
 

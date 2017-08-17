@@ -24,24 +24,33 @@ typedef NS_ENUM(NSUInteger, BarrageState) {
 - (BarrageViewCell *)barrageView:(BarrageView *)barrageView cellForBarrageData:(id)barrageData;
 
 @optional
-
 // 弹幕设置
 - (void)barrageView:(BarrageView *)barrageView configureBarrageRenderView:(BarrageRenderView *)barrageRenderView priority:(BarragePriority)priority;
+
 // 弹幕优先级
 - (BarragePriority)barragePriorityWithData:(id)barrageData;
+
+@end
+
+@protocol BarrageViewDelegate <NSObject>
+@optional
+// 选中弹幕
+- (void)barrageView:(BarrageView *)barrageView didClickedBarrageCell:(BarrageViewCell *)BarrageCell;
 
 @end
 
 
 @interface BarrageView : UIView
 
+@property (nonatomic, weak) id<BarrageViewDataSource> dataSource;
+
+@property (nonatomic, weak) id<BarrageViewDelegate> delegate;
+
 // 弹幕状态
 @property (nonatomic, assign, readonly) BarrageState state;
 
 // 弹幕发送间隔
 @property (nonatomic, assign) NSTimeInterval timeInterval;
-
-@property (nonatomic, weak) id<BarrageViewDataSource> dataSource;
 
 // 弹幕优先级层
 - (BarrageRenderView *)renderViewWithPriority:(BarragePriority)priority;

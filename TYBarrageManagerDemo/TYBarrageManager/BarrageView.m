@@ -71,7 +71,6 @@
         [self addSubview:renderView];
         [array addObject:renderView];
     }
-    
     _renderViews = [array copy];
 }
 
@@ -234,34 +233,23 @@
 #pragma mark - hitTest
 
 - (id)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    __block UIView *clickedView = nil;
+    __block UIView *hitView = nil;
     [_renderViews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(BarrageRenderView *renderView, NSUInteger idx, BOOL * stop) {
-        NSArray *subViews = renderView.subviews;
-        [subViews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(UIView *subView, NSUInteger idx, BOOL * stop) {
-            if([subView isKindOfClass:[BarrageViewCell class]]){ //是要找的图片
-                CALayer *layer = subView.layer.presentationLayer; //图片的显示层
-                if(CGRectContainsPoint(layer.frame, point)){ //触摸点在显示层中，返回当前图片
-                    clickedView = subView;
-                    *stop = YES;
-                }
-            }
-        }];
-        
-        if (clickedView) {
+        hitView = [renderView hitTest:point withEvent:event];
+        if (hitView) {
             *stop = YES;
         }
     }];
-
-    if (clickedView) {
-        return clickedView;
+    
+    if (_delegate && [hitView isKindOfClass:[BarrageViewCell class]] && [_delegate respondsToSelector:@selector(barrageView:didClickedBarrageCell:)]) {
+        [_delegate barrageView:self didClickedBarrageCell:(BarrageViewCell *)hitView];
     }
-    return [super hitTest:point withEvent:event];
+    return hitView ? hitView : [super hitTest:point withEvent:event];
 }
 
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
     for (BarrageRenderView *renderView in _renderViews) {
         renderView.frame = self.bounds;
     }
