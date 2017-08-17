@@ -39,6 +39,9 @@
 // 最后航道bottom边距
 @property (nonatomic, assign) NSInteger lastChannelBottomEdge;
 
+// 弹幕直接最小间距 默认6
+@property (nonatomic, assign) CGFloat barrageMinSpacing;
+
 // 最大当前准备渲染数 默认30
 @property (nonatomic, assign) NSInteger maxBarrageDataCount;
 // 最大当前等待渲染数 默认30

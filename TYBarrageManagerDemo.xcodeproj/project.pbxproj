@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2B3A72951F452E5100EAFAC1 /* GrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3A72941F452E5100EAFAC1 /* GrowingTextView.m */; };
 		2B3A72981F452F2D00EAFAC1 /* BarrageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3A72971F452F2D00EAFAC1 /* BarrageInputView.m */; };
-		2B4A5C931DF1076900394B7B /* WeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A5C921DF1076900394B7B /* WeakProxy.m */; };
 		2B5567E71DEEAFAF0069077B /* BarrageData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5567E61DEEAFAF0069077B /* BarrageData.m */; };
 		2B5567EA1DEEB0030069077B /* BarrageLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5567E91DEEB0030069077B /* BarrageLabelCell.m */; };
 		2B60B46C1DED5A08002141FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B60B46B1DED5A08002141FC /* main.m */; };
@@ -39,8 +38,6 @@
 		2B3A72941F452E5100EAFAC1 /* GrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowingTextView.m; sourceTree = "<group>"; };
 		2B3A72961F452F2D00EAFAC1 /* BarrageInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageInputView.h; sourceTree = "<group>"; };
 		2B3A72971F452F2D00EAFAC1 /* BarrageInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageInputView.m; sourceTree = "<group>"; };
-		2B4A5C911DF1076900394B7B /* WeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeakProxy.h; sourceTree = "<group>"; };
-		2B4A5C921DF1076900394B7B /* WeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakProxy.m; sourceTree = "<group>"; };
 		2B5567E51DEEAFAF0069077B /* BarrageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageData.h; sourceTree = "<group>"; };
 		2B5567E61DEEAFAF0069077B /* BarrageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageData.m; sourceTree = "<group>"; };
 		2B5567E81DEEB0030069077B /* BarrageLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageLabelCell.h; sourceTree = "<group>"; };
@@ -151,8 +148,6 @@
 				2B60B4A61DED6EF5002141FC /* BarrageRenderView.m */,
 				2B60B49F1DED5B2F002141FC /* BarrageViewCell.h */,
 				2B60B4A01DED5B2F002141FC /* BarrageViewCell.m */,
-				2B4A5C911DF1076900394B7B /* WeakProxy.h */,
-				2B4A5C921DF1076900394B7B /* WeakProxy.m */,
 				2B3A72931F452E5100EAFAC1 /* GrowingTextView.h */,
 				2B3A72941F452E5100EAFAC1 /* GrowingTextView.m */,
 			);
@@ -271,7 +266,6 @@
 				2B60B46F1DED5A08002141FC /* AppDelegate.m in Sources */,
 				2B3A72951F452E5100EAFAC1 /* GrowingTextView.m in Sources */,
 				2B60B4A11DED5B2F002141FC /* BarrageViewCell.m in Sources */,
-				2B4A5C931DF1076900394B7B /* WeakProxy.m in Sources */,
 				2B5567E71DEEAFAF0069077B /* BarrageData.m in Sources */,
 				2B60B46C1DED5A08002141FC /* main.m in Sources */,
 			);
@@ -356,7 +350,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -399,7 +393,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

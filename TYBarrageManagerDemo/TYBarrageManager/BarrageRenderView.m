@@ -51,6 +51,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        _barrageMinSpacing = 6;
         _maxChannelCount = 0;
         _channelHeight = 26;
         _maxBarrageDataCount = 30;
@@ -210,7 +211,7 @@
         return YES;
     }
     
-    if ((cell.state == BarrageViewCellRenderStateAnimationing || cell.state == BarrageViewCellRenderStatePauseing) && cell.renderChannel == channel && CGRectGetMaxX([cell renderFrame]) < CGRectGetWidth(self.frame)) {
+    if ((cell.state == BarrageViewCellRenderStateAnimationing || cell.state == BarrageViewCellRenderStatePauseing) && cell.renderChannel == channel && CGRectGetMaxX([cell renderFrame])+_barrageMinSpacing < CGRectGetWidth(self.frame)) {
         return YES;
     }
     return NO;

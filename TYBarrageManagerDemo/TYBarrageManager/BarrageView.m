@@ -7,7 +7,6 @@
 //
 
 #import "BarrageView.h"
-#import "WeakProxy.h"
 
 @interface BarrageView ()<BarrageRenderViewDataSource> {
     struct {
@@ -215,8 +214,7 @@
 
 - (void)startTimer {
     if (!_timer) {
-        WeakProxy *proxy = [WeakProxy proxyWithTarget:self];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval target:proxy selector:@selector(renderBarrage) userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval target:self selector:@selector(renderBarrage) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     }
 }
@@ -243,6 +241,12 @@
         [_delegate barrageView:self didClickedBarrageCell:(BarrageViewCell *)hitView];
     }
     return hitView ? hitView : [super hitTest:point withEvent:event];
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    if (!newSuperview) {
+        [self stopTimer];
+    }
 }
 
 - (void)layoutSubviews {
