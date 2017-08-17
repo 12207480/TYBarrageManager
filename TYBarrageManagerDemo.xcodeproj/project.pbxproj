@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B3A72921F452E4800EAFAC1 /* BarrageInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3A72911F452E4800EAFAC1 /* BarrageInputView.m */; };
+		2B3A72951F452E5100EAFAC1 /* GrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3A72941F452E5100EAFAC1 /* GrowingTextView.m */; };
+		2B4A5C931DF1076900394B7B /* WeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4A5C921DF1076900394B7B /* WeakProxy.m */; };
+		2B5567E71DEEAFAF0069077B /* BarrageData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5567E61DEEAFAF0069077B /* BarrageData.m */; };
+		2B5567EA1DEEB0030069077B /* BarrageLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5567E91DEEB0030069077B /* BarrageLabelCell.m */; };
 		2B60B46C1DED5A08002141FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B60B46B1DED5A08002141FC /* main.m */; };
 		2B60B46F1DED5A08002141FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B60B46E1DED5A08002141FC /* AppDelegate.m */; };
 		2B60B4721DED5A08002141FC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B60B4711DED5A08002141FC /* ViewController.m */; };
@@ -14,6 +19,9 @@
 		2B60B4771DED5A08002141FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B60B4761DED5A08002141FC /* Assets.xcassets */; };
 		2B60B47A1DED5A08002141FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B60B4781DED5A08002141FC /* LaunchScreen.storyboard */; };
 		2B60B4851DED5A08002141FC /* TYBarrageManagerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B60B4841DED5A08002141FC /* TYBarrageManagerDemoTests.m */; };
+		2B60B49E1DED5B08002141FC /* BarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B60B49D1DED5B08002141FC /* BarrageView.m */; };
+		2B60B4A11DED5B2F002141FC /* BarrageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B60B4A01DED5B2F002141FC /* BarrageViewCell.m */; };
+		2B60B4A71DED6EF5002141FC /* BarrageRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B60B4A61DED6EF5002141FC /* BarrageRenderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +35,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B3A72901F452E4800EAFAC1 /* BarrageInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageInputView.h; sourceTree = "<group>"; };
+		2B3A72911F452E4800EAFAC1 /* BarrageInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageInputView.m; sourceTree = "<group>"; };
+		2B3A72931F452E5100EAFAC1 /* GrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowingTextView.h; sourceTree = "<group>"; };
+		2B3A72941F452E5100EAFAC1 /* GrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowingTextView.m; sourceTree = "<group>"; };
+		2B4A5C911DF1076900394B7B /* WeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeakProxy.h; sourceTree = "<group>"; };
+		2B4A5C921DF1076900394B7B /* WeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakProxy.m; sourceTree = "<group>"; };
+		2B5567E51DEEAFAF0069077B /* BarrageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageData.h; sourceTree = "<group>"; };
+		2B5567E61DEEAFAF0069077B /* BarrageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageData.m; sourceTree = "<group>"; };
+		2B5567E81DEEB0030069077B /* BarrageLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageLabelCell.h; sourceTree = "<group>"; };
+		2B5567E91DEEB0030069077B /* BarrageLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageLabelCell.m; sourceTree = "<group>"; };
 		2B60B4671DED5A08002141FC /* TYBarrageManagerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TYBarrageManagerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B60B46B1DED5A08002141FC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2B60B46D1DED5A08002141FC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -40,6 +58,12 @@
 		2B60B4801DED5A08002141FC /* TYBarrageManagerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TYBarrageManagerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B60B4841DED5A08002141FC /* TYBarrageManagerDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYBarrageManagerDemoTests.m; sourceTree = "<group>"; };
 		2B60B4861DED5A08002141FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B60B49C1DED5B08002141FC /* BarrageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageView.h; sourceTree = "<group>"; };
+		2B60B49D1DED5B08002141FC /* BarrageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageView.m; sourceTree = "<group>"; };
+		2B60B49F1DED5B2F002141FC /* BarrageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageViewCell.h; sourceTree = "<group>"; };
+		2B60B4A01DED5B2F002141FC /* BarrageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageViewCell.m; sourceTree = "<group>"; };
+		2B60B4A51DED6EF5002141FC /* BarrageRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageRenderView.h; sourceTree = "<group>"; };
+		2B60B4A61DED6EF5002141FC /* BarrageRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageRenderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +105,13 @@
 		2B60B4691DED5A08002141FC /* TYBarrageManagerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				2B60B48F1DED5A2A002141FC /* TYBarrageManager */,
 				2B60B46D1DED5A08002141FC /* AppDelegate.h */,
 				2B60B46E1DED5A08002141FC /* AppDelegate.m */,
+				2B5567E51DEEAFAF0069077B /* BarrageData.h */,
+				2B5567E61DEEAFAF0069077B /* BarrageData.m */,
+				2B5567E81DEEB0030069077B /* BarrageLabelCell.h */,
+				2B5567E91DEEB0030069077B /* BarrageLabelCell.m */,
 				2B60B4701DED5A08002141FC /* ViewController.h */,
 				2B60B4711DED5A08002141FC /* ViewController.m */,
 				2B60B4731DED5A08002141FC /* Main.storyboard */,
@@ -109,6 +138,25 @@
 				2B60B4861DED5A08002141FC /* Info.plist */,
 			);
 			path = TYBarrageManagerDemoTests;
+			sourceTree = "<group>";
+		};
+		2B60B48F1DED5A2A002141FC /* TYBarrageManager */ = {
+			isa = PBXGroup;
+			children = (
+				2B3A72931F452E5100EAFAC1 /* GrowingTextView.h */,
+				2B3A72941F452E5100EAFAC1 /* GrowingTextView.m */,
+				2B3A72901F452E4800EAFAC1 /* BarrageInputView.h */,
+				2B3A72911F452E4800EAFAC1 /* BarrageInputView.m */,
+				2B60B49C1DED5B08002141FC /* BarrageView.h */,
+				2B60B49D1DED5B08002141FC /* BarrageView.m */,
+				2B60B4A51DED6EF5002141FC /* BarrageRenderView.h */,
+				2B60B4A61DED6EF5002141FC /* BarrageRenderView.m */,
+				2B60B49F1DED5B2F002141FC /* BarrageViewCell.h */,
+				2B60B4A01DED5B2F002141FC /* BarrageViewCell.m */,
+				2B4A5C911DF1076900394B7B /* WeakProxy.h */,
+				2B4A5C921DF1076900394B7B /* WeakProxy.m */,
+			);
+			path = TYBarrageManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,8 +263,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B60B49E1DED5B08002141FC /* BarrageView.m in Sources */,
+				2B5567EA1DEEB0030069077B /* BarrageLabelCell.m in Sources */,
+				2B60B4A71DED6EF5002141FC /* BarrageRenderView.m in Sources */,
 				2B60B4721DED5A08002141FC /* ViewController.m in Sources */,
+				2B3A72921F452E4800EAFAC1 /* BarrageInputView.m in Sources */,
 				2B60B46F1DED5A08002141FC /* AppDelegate.m in Sources */,
+				2B3A72951F452E5100EAFAC1 /* GrowingTextView.m in Sources */,
+				2B60B4A11DED5B2F002141FC /* BarrageViewCell.m in Sources */,
+				2B4A5C931DF1076900394B7B /* WeakProxy.m in Sources */,
+				2B5567E71DEEAFAF0069077B /* BarrageData.m in Sources */,
 				2B60B46C1DED5A08002141FC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +474,7 @@
 				2B60B48B1DED5A08002141FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2B60B48C1DED5A08002141FC /* Build configuration list for PBXNativeTarget "TYBarrageManagerDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +483,7 @@
 				2B60B48E1DED5A08002141FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
