@@ -20,8 +20,7 @@
 
 @implementation GrowingTextView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         
         [self configureInputView];
@@ -29,8 +28,7 @@
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         
         [self configureInputView];
@@ -38,20 +36,18 @@
     return self;
 }
 
-- (void)configureInputView
-{
+- (void)configureInputView {
     self.scrollEnabled = NO;
     self.scrollsToTop = NO;
     self.showsHorizontalScrollIndicator = NO;
     self.enablesReturnKeyAutomatically = YES;
     
     [self addPlaceHolderLabel];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextViewTextDidChangeNotification object:self];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextViewTextDidChangeNotification object:nil];
 }
 
-- (void)addPlaceHolderLabel
-{
+- (void)addPlaceHolderLabel {
     UILabel *placeHolderLabel = [[UILabel alloc]init];
     placeHolderLabel.userInteractionEnabled = NO;
     placeHolderLabel.font = self.font;
@@ -59,23 +55,16 @@
     _placeHolderLabel = placeHolderLabel;
 }
 
-- (void)setMaxNumOfLines:(NSUInteger)maxNumOfLines
-{
+- (void)setMaxNumOfLines:(NSUInteger)maxNumOfLines {
     _maxNumOfLines = maxNumOfLines;
-    
     _maxTextHeight = ceil(self.font.lineHeight * maxNumOfLines + self.textContainerInset.top + self.textContainerInset.bottom);
 }
 
 #pragma mark - Notification
 
-- (void)textDidChange:(NSNotification *)notification
-{
-    if (notification.object != self) {
-        return;
-    }
+- (void)textDidChange:(NSNotification *)notification {
     // 占位文字是否显示
     self.placeHolderLabel.hidden = self.text.length > 0;
-    
     if (self.text.length == 1) {
         if ([self.text isEqualToString:@" "] || [self.text isEqualToString:@"\n"]) {
             self.text = @"";
@@ -97,9 +86,7 @@
         [_growingTextDelegate growingTextViewDidChangeText:self];
     }
 
-    
     CGFloat height = ceilf([self sizeThatFits:CGSizeMake(self.bounds.size.width, MAXFLOAT)].height);
-    
     if (_textHeight != height) { // 高度不一样，就改变了高度
         
         // 最大高度，可以滚动
@@ -114,16 +101,14 @@
 }
 
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     if (!_placeHolderLabel.hidden) {
         _placeHolderLabel.frame = CGRectMake(_placeHolderEdge.left, _placeHolderEdge.top, CGRectGetWidth(self.frame)-_placeHolderEdge.left- _placeHolderEdge.right, CGRectGetHeight(self.frame) - _placeHolderEdge.top - _placeHolderEdge.bottom);
     }
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

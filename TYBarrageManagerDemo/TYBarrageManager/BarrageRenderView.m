@@ -43,8 +43,7 @@
 
 @implementation BarrageRenderView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         _maxChannelCount = 0;
         _channelHeight = 26;
@@ -58,29 +57,25 @@
 
 #pragma mark - getter setter
 
-- (BarrageView *)barrageView
-{
+- (BarrageView *)barrageView {
     return (BarrageView *)self.superview;
 }
 
-- (NSMutableArray *)barrageDatas
-{
+- (NSMutableArray *)barrageDatas {
     if (!_barrageDatas) {
         _barrageDatas = [NSMutableArray array];
     }
     return _barrageDatas;
 }
 
-- (NSMutableArray *)barragebufferDatas
-{
+- (NSMutableArray *)barragebufferDatas {
     if (!_barragebufferDatas) {
         _barragebufferDatas = [NSMutableArray array];
     }
     return _barragebufferDatas;
 }
 
-- (NSMutableDictionary *)channelBarrages
-{
+- (NSMutableDictionary *)channelBarrages {
     if (!_channelBarrages) {
         _channelBarrages = [NSMutableDictionary dictionary];
     }
@@ -89,13 +84,11 @@
 
 #pragma mark - RenderBarrage
 
-- (void)prepareRenderBarrage
-{
+- (void)prepareRenderBarrage {
     [self configreChannel];
 }
 
-- (void)recieveBarrageDatas:(NSArray *)barrageDatas
-{
+- (void)recieveBarrageDatas:(NSArray *)barrageDatas {
     if (self.barrageDatas.count < _maxBarrageDataCount) {
         [self.barrageDatas addObjectsFromArray:barrageDatas];
     }else if (self.barragebufferDatas.count < _maxBufferBarrageDataCount) {
@@ -108,13 +101,11 @@
     }
 }
 
-- (BOOL)haveBarrageDatas
-{
+- (BOOL)haveBarrageDatas {
     return _barrageDatas.count > 0 || _barragebufferDatas.count > 0;
 }
 
-- (void)renderBarrage
-{
+- (void)renderBarrage {
     if (_channelCount == 0) {
         NSLog(@"renader channelCount is 0!");
         return;
@@ -145,8 +136,7 @@
 
 }
 
-- (void)renderBarrageCellData:(id)barrageData channel:(NSUInteger) channel
-{
+- (void)renderBarrageCellData:(id)barrageData channel:(NSUInteger) channel {
     if (!barrageData) {
         return;
     }
@@ -166,11 +156,10 @@
     
     [self.channelBarrages setObject:cell forKey:@(channel)];
 
-    [cell animationBarrage];
+    [cell startBarrage];
 }
 
-- (void)clearBarrage
-{
+- (void)clearBarrage {
     for (UIView *subView in self.subviews) {
         if ([subView isKindOfClass:[BarrageViewCell class]]) {
             [(BarrageViewCell *)subView removeBarrage];
@@ -180,8 +169,7 @@
 
 #pragma mark - control
 
-- (void)resume
-{
+- (void)resume {
     for (UIView *subView in self.subviews) {
         if ([subView isKindOfClass:[BarrageViewCell class]]) {
             [(BarrageViewCell *)subView resumeBarrage];
@@ -189,8 +177,7 @@
     }
 }
 
-- (void)pause
-{
+- (void)pause {
     for (UIView *subView in self.subviews) {
         if ([subView isKindOfClass:[BarrageViewCell class]]) {
            [(BarrageViewCell *)subView pauseBarrage];
@@ -198,15 +185,13 @@
     }
 }
 
-- (void)stop
-{
+- (void)stop {
     [self clearBarrage];
     
     [self clearData];
 }
 
-- (void)clearData
-{
+- (void)clearData {
     [self.barrageDatas removeAllObjects];
     [self.barragebufferDatas removeAllObjects];
     [self.channelBarrages removeAllObjects];
@@ -214,8 +199,7 @@
 
 #pragma mark - private
 
-- (void)configreChannel
-{
+- (void)configreChannel {
     NSInteger channelCount =  CGRectGetHeight(self.frame)/(_channelHeight - _firstChannelTopEdge - _lastChannelBottomEdge);
     if (_maxChannelCount > 0 && _maxChannelCount < channelCount) {
         channelCount = _maxChannelCount;
@@ -223,8 +207,7 @@
     _channelCount = channelCount;
 }
 
-- (NSIndexSet *)findRanderBarrageChannel
-{
+- (NSIndexSet *)findRanderBarrageChannel {
     NSMutableIndexSet *availableChannel = [NSMutableIndexSet indexSet];
     NSUInteger forecastChannel = arc4random_uniform((unsigned int)_channelCount);
     if ([self isAvailableChannel:forecastChannel]) {
@@ -249,8 +232,7 @@
     return availableChannel;
 }
 
-- (BOOL)isAvailableChannel:(NSUInteger)channel
-{
+- (BOOL)isAvailableChannel:(NSUInteger)channel {
     BarrageViewCell *cell = [self.channelBarrages objectForKey:@(channel)];
     if (!cell) {
         return YES;

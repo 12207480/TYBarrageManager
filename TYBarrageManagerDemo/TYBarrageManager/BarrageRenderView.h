@@ -35,13 +35,26 @@
  */
 - (void)prepareRenderBarrage;
 
+/**
+ 收到渲染数据
+ */
 - (void)recieveBarrageDatas:(NSArray *)barrageDatas;
 
-- (BOOL)haveBarrageDatas;
-
+/**
+ 开始渲染
+ */
 - (void)renderBarrage;
 
+/**
+ 是否还存在渲染数据
+ */
+- (BOOL)haveBarrageDatas;
+
+/**
+ 清除渲染数据
+ */
 - (void)clearBarrage;
+
 
 - (void)resume;
 

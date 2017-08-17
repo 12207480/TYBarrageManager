@@ -43,8 +43,7 @@
 
 #pragma mark - init
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         
         [self configreBarrageView];
@@ -52,8 +51,7 @@
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         
         [self configreBarrageView];
@@ -63,14 +61,12 @@
 
 #pragma mark - addSubView
 
-- (void)configreBarrageView
-{
+- (void)configreBarrageView {
     _timeInterval = 0.6;
     [self addBarrageContentViews];
 }
 
-- (void)addBarrageContentViews
-{
+- (void)addBarrageContentViews {
     NSMutableArray *array = [NSMutableArray array];
     for (int idx = 0; idx < MAX_RENDER_COUNT; ++idx) {
         BarrageRenderView *renderView = [[BarrageRenderView alloc]initWithFrame:self.frame];
@@ -85,15 +81,13 @@
 
 #pragma mark - geter setter
 
-- (void)setDataSource:(id<BarrageViewDataSource>)dataSource
-{
+- (void)setDataSource:(id<BarrageViewDataSource>)dataSource {
     _dataSource = dataSource;
     _dataSourceFlags.barragePriorityWithData = [dataSource respondsToSelector:@selector(barragePriorityWithData:)];
     _dataSourceFlags.configureBarrageRenderView = [dataSource respondsToSelector:@selector(barrageView:configureBarrageRenderView:priority:)];
 }
 
-- (BarrageRenderView *)renderViewWithPriority:(BarragePriority)priority
-{
+- (BarrageRenderView *)renderViewWithPriority:(BarragePriority)priority {
     if (priority < _renderViews.count) {
         return _renderViews[priority];
     }
@@ -102,8 +96,7 @@
 
 #pragma mark - randerBarrage
 
-- (void)prepareBarrage
-{
+- (void)prepareBarrage {
     if (_state != BarrageStateUnPrepare && _state != BarrageStateStoped) {
         return;
     }
@@ -118,8 +111,7 @@
     _state = BarrageStateWaiting;
 }
 
-- (void)sendBarrageDatas:(NSArray *)barrageDatas
-{
+- (void)sendBarrageDatas:(NSArray *)barrageDatas {
     if (_state == BarrageStateUnPrepare) {
         [self prepareBarrage];
     }
@@ -140,8 +132,7 @@
     [self startTimerIfNeed];
 }
 
-- (void)renderBarrage
-{
+- (void)renderBarrage {
     if (_state == BarrageStateStoped || _state == BarrageStatePauseing) {
         return;
     }
@@ -160,8 +151,7 @@
     }
 }
 
-- (void)clearBarrage
-{
+- (void)clearBarrage {
     [self clearTimer];
     for (BarrageRenderView *renderView in _renderViews) {
         [renderView clearBarrage];
@@ -170,15 +160,13 @@
 
 #pragma mark - dataSource
 
-- (BarrageViewCell *)cellForBarrageData:(id)barrageData
-{
+- (BarrageViewCell *)cellForBarrageData:(id)barrageData {
     return [_dataSource barrageView:self cellForBarrageData:barrageData];
 }
 
 #pragma mark - control
 
-- (void)resume
-{
+- (void)resume {
     _state = BarrageStateWaiting;
     for (BarrageRenderView *renderView in _renderViews) {
         [renderView resume];
@@ -186,8 +174,7 @@
     [self startTimerIfNeed];
 }
 
-- (void)pause
-{
+- (void)pause {
     _state = BarrageStatePauseing;
     [self clearTimer];
     for (BarrageRenderView *renderView in _renderViews) {
@@ -195,8 +182,7 @@
     }
 }
 
-- (void)restart
-{
+- (void)restart {
     if (_state == BarrageStateRendering || _state == BarrageStatePauseing) {
         [self clearBarrage];
     }
@@ -206,8 +192,7 @@
     [self prepareBarrage];
 }
 
-- (void)stop
-{
+- (void)stop {
     _state = BarrageStateStoped;
     [self clearTimer];
     for (BarrageRenderView *renderView in _renderViews) {
@@ -217,8 +202,7 @@
 
 #pragma mark - private
 
-- (NSDictionary *)priorityBarrageDictionaryWithDatas:(NSArray *)barrageDatas
-{
+- (NSDictionary *)priorityBarrageDictionaryWithDatas:(NSArray *)barrageDatas {
     NSMutableDictionary *priorityBarrages = [NSMutableDictionary dictionary];
     if (_dataSourceFlags.barragePriorityWithData) {
         for (id barrageData in barrageDatas) {
@@ -236,8 +220,7 @@
     return priorityBarrages;
 }
 
-- (void)startTimerIfNeed
-{
+- (void)startTimerIfNeed {
     if (!_timer) {
         WeakProxy *proxy = [WeakProxy proxyWithTarget:self];
         _timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval target:proxy selector:@selector(renderBarrage) userInfo:nil repeats:YES];
@@ -245,8 +228,7 @@
     }
 }
 
-- (void)clearTimer
-{
+- (void)clearTimer {
     if ([_timer isValid]) {
         [_timer invalidate];
         _timer = nil;
@@ -255,8 +237,7 @@
 
 #pragma mark - hitTest
 
-- (id)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
+- (id)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     __block UIView *clickedView = nil;
     [self.renderViews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(BarrageRenderView *renderView, NSUInteger idx, BOOL * stop) {
         NSArray *subViews = renderView.subviews;
@@ -282,8 +263,7 @@
 }
 
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     
     for (BarrageRenderView *renderView in _renderViews) {
@@ -291,8 +271,7 @@
     }
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self stop];
 }
 

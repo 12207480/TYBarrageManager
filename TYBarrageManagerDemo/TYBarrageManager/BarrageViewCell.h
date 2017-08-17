@@ -25,8 +25,7 @@ typedef NS_ENUM(NSUInteger, BarrageViewCellState) {
 
 @interface BarrageViewCell : UIView
 
-// configure
-// id
+// identifier
 @property (nonatomic, strong) NSString *identifier;
 
 // 弹幕大小
@@ -47,10 +46,10 @@ typedef NS_ENUM(NSUInteger, BarrageViewCellState) {
 // 弹幕轨道
 @property (nonatomic, assign, readonly) NSInteger renderChannel;
 
-// 弹幕当前render framw
+// 弹幕当前render‘s frame
 - (CGRect)renderFrame;
 
-- (void)animationBarrage;
+- (void)startBarrage;
 
 - (void)removeBarrage;
 

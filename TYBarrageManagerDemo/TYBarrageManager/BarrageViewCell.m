@@ -22,8 +22,7 @@
 
 @implementation BarrageViewCell
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         
         [self addSingleTap];
@@ -31,24 +30,21 @@
     return self;
 }
 
-- (void)addSingleTap
-{
+- (void)addSingleTap {
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Clicked)];
     singleTap.enabled = _singleTapEnable;
     [self addGestureRecognizer:singleTap];
     _singleTap = singleTap;
 }
 
-- (void)setSingleTapEnable:(BOOL)singleTapEnable
-{
+- (void)setSingleTapEnable:(BOOL)singleTapEnable {
     _singleTapEnable = singleTapEnable;
     _singleTap.enabled = singleTapEnable;
 }
 
 #pragma mark - barrage
 
-- (void)animationBarrage
-{
+- (void)startBarrage {
     CGFloat renderDuring = self.frame.origin.x + CGRectGetWidth(self.frame) > 0 ? (self.frame.origin.x + CGRectGetWidth(self.frame))/_renderSpeed:0;
     [UIView animateWithDuration:renderDuring delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         _state = BarrageViewCellStateAnimationing;
@@ -70,8 +66,7 @@
     [self removeFromSuperview];
 }
 
-- (void)pauseBarrage
-{
+- (void)pauseBarrage {
     self.state = BarrageViewCellStatePauseing;
     CGRect rect = self.frame;
     if (self.layer.presentationLayer) {
@@ -81,13 +76,11 @@
     [self.layer removeAllAnimations];
 }
 
-- (void)resumeBarrage
-{
-    [self animationBarrage];
+- (void)resumeBarrage {
+    [self startBarrage];
 }
 
-- (CGRect)renderFrame
-{
+- (CGRect)renderFrame {
     switch (_state) {
         case BarrageViewCellStateAnimationing:
         {
@@ -115,7 +108,7 @@
 
 - (void)Clicked
 {
-    NSLog(@"Clicked %@",self);
+    NSLog(@"Clicked BarrageViewCell");
 }
 
 @end

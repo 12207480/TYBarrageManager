@@ -22,7 +22,7 @@
 @interface GrowingTextView : UITextView
 
 @property (nonatomic, weak) id<GrowingTextViewDelegate> growingTextDelegate;
-
+// placeHolder 文本
 @property (nonatomic, weak, readonly) UILabel *placeHolderLabel;
 // placeHolder边距
 @property (nonatomic, assign) UIEdgeInsets placeHolderEdge;
