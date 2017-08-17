@@ -7,13 +7,6 @@
 //
 
 #import "BarrageRenderView.h"
-#import "BarrageView.h"
-
-@interface BarrageView ()
-
-- (BarrageViewCell *)cellForBarrageData:(id)barrageData;
-
-@end
 
 @interface BarrageViewCell ()
 
@@ -29,8 +22,6 @@
 
 @property (nonatomic, assign) BarragePriority priority;
 
-@property (nonatomic, weak, readonly) BarrageView *barrageView;
-
 @property (nonatomic, assign)NSInteger channelCount;
 
 @property (nonatomic, strong) NSMutableArray *barrageDatas;
@@ -42,6 +33,13 @@
 @end
 
 @implementation BarrageRenderView
+
+- (instancetype)initWithFrame:(CGRect)frame Priority:(BarragePriority)priority {
+    if (self = [self initWithFrame:frame]) {
+        self.priority = priority;
+    }
+    return self;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -56,10 +54,6 @@
 }
 
 #pragma mark - getter setter
-
-- (BarrageView *)barrageView {
-    return (BarrageView *)self.superview;
-}
 
 - (NSMutableArray *)barrageDatas {
     if (!_barrageDatas) {
@@ -141,7 +135,7 @@
         return;
     }
     
-    BarrageViewCell *cell = [self.barrageView cellForBarrageData:barrageData];
+    BarrageViewCell *cell = [_dataSource barrageRenderView:self cellForBarrageData:barrageData];
     cell.state = BarrageViewCellRenderStateWaiting;
     cell.renderChannel = channel;
     cell.priority = self.priority;

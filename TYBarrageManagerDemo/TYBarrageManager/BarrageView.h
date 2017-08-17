@@ -24,11 +24,15 @@ typedef NS_ENUM(NSUInteger, BarrageState) {
 - (BarrageViewCell *)barrageView:(BarrageView *)barrageView cellForBarrageData:(id)barrageData;
 
 @optional
+
+// 渲染层个数，每个渲染层都有一个BarragePriority 默认 3层
+- (NSUInteger)countOfRenderViewInBarrageView:(BarrageView *)barrageView;
+
 // 弹幕设置
 - (void)barrageView:(BarrageView *)barrageView configureBarrageRenderView:(BarrageRenderView *)renderView;
 
 // 弹幕优先级
-- (BarragePriority)barragePriorityWithData:(id)barrageData;
+- (BarragePriority)barrageView:(BarrageView *)barrageView priorityWithBarrageData:(id)barrageData;
 
 @end
 

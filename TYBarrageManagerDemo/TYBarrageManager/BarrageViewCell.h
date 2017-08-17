@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 // 弹幕显示优先级,高优先级的始终会显示低的在前面
-typedef NS_ENUM(NSUInteger, BarragePriority) {
-    BarragePriorityLow,
-    BarragePriorityMedium,
-    BarragePriorityHigh
-};
+typedef NSUInteger BarragePriority;
+static BarragePriority BarragePriorityLow = 0;
+static BarragePriority BarragePriorityMedium = 1;
+static BarragePriority BarragePriorityHigh = 2;
+
 
 // 弹幕cell渲染状态
 typedef NS_ENUM(NSUInteger, BarrageViewCellRenderState) {

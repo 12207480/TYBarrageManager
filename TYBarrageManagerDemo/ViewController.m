@@ -101,7 +101,7 @@
 
 #pragma mark - BarrageViewDataSource
 
-- (BarragePriority)barragePriorityWithData:(BarrageData *)barrageData
+- (BarragePriority)barrageView:(BarrageView *)barrageView priorityWithBarrageData:(BarrageData*)barrageData
 {
     return barrageData.priority;
 }

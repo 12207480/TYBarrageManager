@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "BarrageViewCell.h"
 
+@class BarrageRenderView;
+@protocol BarrageRenderViewDataSource <NSObject>
+
+- (BarrageViewCell *)barrageRenderView:(BarrageRenderView *)renderView cellForBarrageData:(id)barrageData;
+
+@end
+
 // 渲染层
 @interface BarrageRenderView : UIView
+
+@property (nonatomic, weak) id<BarrageRenderViewDataSource> dataSource;
 
 // 渲染层优先级，高的在前面
 @property (nonatomic, assign, readonly) BarragePriority priority;
@@ -25,11 +34,13 @@
 // 最后航道bottom边距
 @property (nonatomic, assign) NSInteger lastChannelBottomEdge;
 
-// 最大当前准备渲染数
+// 最大当前准备渲染数 默认30
 @property (nonatomic, assign) NSInteger maxBarrageDataCount;
-// 最大当前等待渲染数
+// 最大当前等待渲染数 默认30
 @property (nonatomic, assign) NSInteger maxBufferBarrageDataCount;
 
+
+- (instancetype)initWithFrame:(CGRect)frame Priority:(BarragePriority)priority;
 
 /**
  准备渲染

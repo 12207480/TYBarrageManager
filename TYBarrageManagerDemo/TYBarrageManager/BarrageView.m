@@ -9,13 +9,7 @@
 #import "BarrageView.h"
 #import "WeakProxy.h"
 
-@interface BarrageRenderView ()
-
-@property (nonatomic, assign) BarragePriority priority;
-
-@end
-
-@interface BarrageView () {
+@interface BarrageView ()<BarrageRenderViewDataSource> {
     struct {
         unsigned int barragePriorityWithData :1;
         unsigned int configureBarrageRenderView :1;
@@ -23,6 +17,8 @@
 }
 
 @property (nonatomic, assign) BarrageState state;
+@property (nonatomic, assign) NSUInteger barrageRenderCount;
+
 
 // UI
 @property (nonatomic, strong) NSArray *renderViews;
@@ -31,9 +27,7 @@
 
 @end
 
-#define MAX_RENDER_COUNT 3
-
-#define RENDER_VIEW_OFFSET 1000
+#define RENDER_VIEW_OFFSET 10000
 
 @implementation BarrageView
 
@@ -64,9 +58,14 @@
 
 - (void)addBarrageContentViews {
     NSMutableArray *array = [NSMutableArray array];
-    for (int idx = 0; idx < MAX_RENDER_COUNT; ++idx) {
-        BarrageRenderView *renderView = [[BarrageRenderView alloc]initWithFrame:self.frame];
-        renderView.priority = idx;
+    BarragePriority count = BarragePriorityHigh + 1;
+    if ([_dataSource respondsToSelector:@selector(countOfRenderViewInBarrageView:)]) {
+        count = [_dataSource countOfRenderViewInBarrageView:self];
+    }
+    _barrageRenderCount = count;
+    for (int idx = 0; idx < count; ++idx) {
+        BarrageRenderView *renderView = [[BarrageRenderView alloc]initWithFrame:self.bounds Priority:idx];
+        renderView.dataSource = self;
         renderView.tag = RENDER_VIEW_OFFSET+idx;
         [self addSubview:renderView];
         [array addObject:renderView];
@@ -78,7 +77,7 @@
 
 - (void)setDataSource:(id<BarrageViewDataSource>)dataSource {
     _dataSource = dataSource;
-    _dataSourceFlags.barragePriorityWithData = [dataSource respondsToSelector:@selector(barragePriorityWithData:)];
+    _dataSourceFlags.barragePriorityWithData = [dataSource respondsToSelector:@selector(barrageView:priorityWithBarrageData:)];
     _dataSourceFlags.configureBarrageRenderView = [dataSource respondsToSelector:@selector(barrageView:configureBarrageRenderView:)];
 }
 
@@ -155,7 +154,7 @@
 
 #pragma mark - dataSource
 
-- (BarrageViewCell *)cellForBarrageData:(id)barrageData {
+- (BarrageViewCell *)barrageRenderView:(BarrageRenderView *)renderView cellForBarrageData:(id)barrageData {
     return [_dataSource barrageView:self cellForBarrageData:barrageData];
 }
 
@@ -199,7 +198,8 @@
     NSMutableDictionary *priorityBarrages = [NSMutableDictionary dictionary];
     if (_dataSourceFlags.barragePriorityWithData) {
         for (id barrageData in barrageDatas) {
-            BarragePriority priority = [_dataSource barragePriorityWithData:barrageData];
+            BarragePriority priority = MIN([_dataSource barrageView:self priorityWithBarrageData:barrageData], _barrageRenderCount);
+            
             NSMutableArray *array = [priorityBarrages objectForKey:@(priority)];
             if (!array) {
                 array = [NSMutableArray array];
@@ -244,7 +244,6 @@
     }
     return hitView ? hitView : [super hitTest:point withEvent:event];
 }
-
 
 - (void)layoutSubviews {
     [super layoutSubviews];
