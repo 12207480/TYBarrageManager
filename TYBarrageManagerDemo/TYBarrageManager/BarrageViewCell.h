@@ -23,16 +23,23 @@ typedef NS_ENUM(NSUInteger, BarrageViewCellRenderState) {
     BarrageViewCellRenderStateFinished,     // 完成
 };
 
+@class BarrageViewCell;
+@protocol BarrageViewCellDelegate <NSObject>
+
+- (void)barrageViewCellDidFinishRender:(BarrageViewCell *)cell;
+
+@end
+
 // 弹幕cell
 @interface BarrageViewCell : UIView
 
-// identifier
-@property (nonatomic, strong) NSString *identifier;
 // 弹幕大小
 @property (nonatomic, assign) CGSize renderSize;
 // 弹幕速度
 @property (nonatomic, assign) CGFloat renderSpeed;
 
+// identifier
+@property (nonatomic, strong, readonly) NSString *identifier;
 // 弹幕状态
 @property (nonatomic, assign, readonly) BarrageViewCellRenderState state;
 // 弹幕优先级
@@ -44,11 +51,11 @@ typedef NS_ENUM(NSUInteger, BarrageViewCellRenderState) {
 
 // 开始弹幕cell动画
 - (void)startBarrage;
-// 移除弹幕cell
-- (void)removeBarrage;
 // 暂停
 - (void)pauseBarrage;
 // 恢复动画
 - (void)resumeBarrage;
+// 移除弹幕cell
+- (void)removeBarrage;
 
 @end

@@ -10,6 +10,8 @@
 
 @interface BarrageViewCell ()
 
+@property (nonatomic, weak) id<BarrageViewCellDelegate> delegate;
+
 @property (nonatomic, assign) BarrageViewCellRenderState state;
 
 @property (nonatomic, assign) BarragePriority priority;
@@ -39,10 +41,15 @@
     } completion:^(BOOL finished) {
         if (finished) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self removeBarrage];
+                [self finishRenderBarrage];
             });
         }
     }];
+}
+
+- (void)finishRenderBarrage {
+    [self removeBarrage];
+    [_delegate barrageViewCellDidFinishRender:self];
 }
 
 - (void)removeBarrage {

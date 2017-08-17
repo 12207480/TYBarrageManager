@@ -10,15 +10,19 @@
 
 @interface BarrageViewCell ()
 
+@property (nonatomic, strong) NSString *identifier;
+
 @property (nonatomic, assign) BarrageViewCellRenderState state;
 
 @property (nonatomic, assign) BarragePriority priority;
 
 @property (nonatomic, assign) NSInteger renderChannel;
 
+@property (nonatomic, weak) id<BarrageViewCellDelegate> delegate;
+
 @end
 
-@interface BarrageRenderView () {
+@interface BarrageRenderView ()<BarrageViewCellDelegate> {
     struct {
         unsigned int barrageRenderAvailableChannels :1;
     }_dataSourceFlags;
@@ -110,7 +114,7 @@
 
 - (void)renderBarrage {
     if (_channelCount == 0) {
-        NSLog(@"renader channelCount is 0!");
+        NSLog(@"renader channelCount must not zero!");
         return;
     }
     
@@ -144,20 +148,17 @@
     }
     
     BarrageViewCell *cell = [_dataSource barrageRenderView:self cellForBarrageData:barrageData];
+    cell.delegate = self;
     cell.state = BarrageViewCellRenderStateWaiting;
     cell.renderChannel = channel;
-    cell.priority = self.priority;
-    cell.frame = CGRectMake(CGRectGetWidth(self.frame), _firstChannelTopEdge+channel*self.channelHeight+(self.channelHeight-cell.renderSize.height)/2, cell.renderSize.width, cell.renderSize.height);
+    cell.priority = _priority;
+    cell.frame = CGRectMake(CGRectGetWidth(self.frame), _firstChannelTopEdge+channel*_channelHeight+(_channelHeight-cell.renderSize.height)/2, cell.renderSize.width, cell.renderSize.height);
     
     if (!cell.superview) {
         [self addSubview:cell];
     }
-    if (cell.hidden) {
-        cell.hidden = NO;
-    }
-    
-    [self.channelBarrages setObject:cell forKey:@(channel)];
 
+    [self.channelBarrages setObject:cell forKey:@(channel)];
     [cell startBarrage];
 }
 
@@ -167,6 +168,10 @@
             [(BarrageViewCell *)subView removeBarrage];
         }
     }
+}
+
+- (void)barrageViewCellDidFinishRender:(BarrageViewCell *)cell {
+    [self.channelBarrages removeObjectForKey:@(cell.renderChannel)];
 }
 
 #pragma mark - channel
@@ -232,7 +237,6 @@
 
 - (void)stop {
     [self clearBarrage];
-    
     [self clearData];
 }
 
