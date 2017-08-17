@@ -244,6 +244,7 @@
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
     if (!newSuperview) {
         [self stopTimer];
     }

@@ -51,6 +51,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        self.clipsToBounds = YES;
         _barrageMinSpacing = 6;
         _maxChannelCount = 0;
         _channelHeight = 26;

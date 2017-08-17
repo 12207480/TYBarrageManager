@@ -132,9 +132,21 @@
     NSLog(@"BarrageViewCell %@",BarrageCell);
 }
 
+- (void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    if (!parent) {
+        [_timer invalidate];
+        _timer = nil;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    
 }
 
 
