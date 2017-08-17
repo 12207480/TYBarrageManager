@@ -12,9 +12,11 @@
 @class BarrageRenderView;
 @protocol BarrageRenderViewDataSource <NSObject>
 
+// 获取弹幕cell
 - (BarrageViewCell *)barrageRenderView:(BarrageRenderView *)renderView cellForBarrageData:(id)barrageData;
 
 @optional
+// 返回可用航道集合
 - (NSIndexSet *)barrageRenderAvailableChannels:(BarrageRenderView *)renderView;
 
 @end
