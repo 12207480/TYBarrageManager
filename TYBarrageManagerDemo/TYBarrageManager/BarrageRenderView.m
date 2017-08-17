@@ -18,7 +18,11 @@
 
 @end
 
-@interface BarrageRenderView ()
+@interface BarrageRenderView () {
+    struct {
+        unsigned int barrageRenderAvailableChannels :1;
+    }_dataSourceFlags;
+}
 
 @property (nonatomic, assign) BarragePriority priority;
 
@@ -76,6 +80,11 @@
     return _channelBarrages;
 }
 
+- (void)setDataSource:(id<BarrageRenderViewDataSource>)dataSource {
+    _dataSource = dataSource;
+    _dataSourceFlags.barrageRenderAvailableChannels = [dataSource respondsToSelector:@selector(barrageRenderAvailableChannels:)];
+}
+
 #pragma mark - RenderBarrage
 
 - (void)prepareRenderBarrage {
@@ -114,8 +123,7 @@
         return;
     }
     
-    NSIndexSet *renderChannels = [self findRanderBarrageChannel];
-    
+    NSIndexSet *renderChannels = [self findRanderBarrageAvailableChannels];
     if (renderChannels.count <= 0) {
         return;
     }
@@ -161,6 +169,49 @@
     }
 }
 
+#pragma mark - channel
+
+- (void)configreChannel {
+    NSInteger channelCount =  CGRectGetHeight(self.frame)/(_channelHeight - _firstChannelTopEdge - _lastChannelBottomEdge);
+    if (_maxChannelCount > 0 && _maxChannelCount < channelCount) {
+        channelCount = _maxChannelCount;
+    }
+    _channelCount = channelCount;
+}
+
+- (NSIndexSet *)findRanderBarrageAvailableChannels {
+    if (_dataSourceFlags.barrageRenderAvailableChannels) {
+        NSIndexSet *channels = [_dataSource barrageRenderAvailableChannels:self];
+        if (channels.count > 0) {
+            return channels;
+        }
+    }
+    NSMutableIndexSet *availableChannels = [NSMutableIndexSet indexSet];
+    for (int index = 0; index < _channelCount; ++index) {
+        if ([self isAvailableChannel:index]) {
+            [availableChannels addIndex:index];;
+        }
+    }
+    return [availableChannels copy];
+}
+
+- (BOOL)isAvailableChannel:(NSUInteger)channel {
+    BarrageViewCell *cell = [self.channelBarrages objectForKey:@(channel)];
+    if (!cell) {
+        return YES;
+    }
+    
+    if (cell.state == BarrageViewCellRenderStateWaiting || cell.state == BarrageViewCellRenderStateFinished) {
+        return YES;
+    }
+    
+    if ((cell.state == BarrageViewCellRenderStateAnimationing || cell.state == BarrageViewCellRenderStatePauseing) && cell.renderChannel == channel && CGRectGetMaxX([cell renderFrame]) < CGRectGetWidth(self.frame)) {
+        return YES;
+    }
+    return NO;
+    
+}
+
 #pragma mark - control
 
 - (void)resume {
@@ -189,58 +240,6 @@
     [self.barrageDatas removeAllObjects];
     [self.barragebufferDatas removeAllObjects];
     [self.channelBarrages removeAllObjects];
-}
-
-#pragma mark - private
-
-- (void)configreChannel {
-    NSInteger channelCount =  CGRectGetHeight(self.frame)/(_channelHeight - _firstChannelTopEdge - _lastChannelBottomEdge);
-    if (_maxChannelCount > 0 && _maxChannelCount < channelCount) {
-        channelCount = _maxChannelCount;
-    }
-    _channelCount = channelCount;
-}
-
-- (NSIndexSet *)findRanderBarrageChannel {
-    NSMutableIndexSet *availableChannel = [NSMutableIndexSet indexSet];
-    NSUInteger forecastChannel = arc4random_uniform((unsigned int)_channelCount);
-    if ([self isAvailableChannel:forecastChannel]) {
-        [availableChannel addIndex:forecastChannel];
-    }
-    
-    BOOL searchDirectionDown = arc4random_uniform(2);
-    NSUInteger searchChannel = searchDirectionDown ? forecastChannel +1+ _channelCount*100: forecastChannel+_channelCount*100 -1 ;
-
-    while (searchChannel%_channelCount != forecastChannel) {
-        
-        if ([self isAvailableChannel:searchChannel%_channelCount]) {
-            [availableChannel addIndex:searchChannel%_channelCount];;
-        }
-        
-        if (searchDirectionDown) {
-            ++searchChannel;
-        }else {
-            --searchChannel;
-        }
-    }
-    return availableChannel;
-}
-
-- (BOOL)isAvailableChannel:(NSUInteger)channel {
-    BarrageViewCell *cell = [self.channelBarrages objectForKey:@(channel)];
-    if (!cell) {
-        return YES;
-    }
-    
-    if (cell.state == BarrageViewCellRenderStateWaiting || cell.state == BarrageViewCellRenderStateFinished) {
-        return YES;
-    }
-    
-    if ((cell.state == BarrageViewCellRenderStateAnimationing || cell.state == BarrageViewCellRenderStatePauseing) && cell.renderChannel == channel && CGRectGetMaxX([cell renderFrame]) < CGRectGetWidth(self.frame)) {
-        return YES;
-    }
-    return NO;
-
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {

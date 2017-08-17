@@ -14,6 +14,9 @@
 
 - (BarrageViewCell *)barrageRenderView:(BarrageRenderView *)renderView cellForBarrageData:(id)barrageData;
 
+@optional
+- (NSIndexSet *)barrageRenderAvailableChannels:(BarrageRenderView *)renderView;
+
 @end
 
 // 渲染层
@@ -61,6 +64,12 @@
  是否还存在渲染数据
  */
 - (BOOL)haveBarrageDatas;
+
+
+/**
+ 航道是否被可用
+ */
+- (BOOL)isAvailableChannel:(NSUInteger)channel;
 
 /**
  清除渲染数据
