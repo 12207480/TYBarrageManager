@@ -38,7 +38,7 @@
 
 - (void)addBarrageView
 {
-    BarrageView *barrageView = [[BarrageView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 250)];
+    BarrageView *barrageView = [[BarrageView alloc]initWithFrame:CGRectMake(0, 64, CGRectGetWidth(self.view.frame), 250)];
     barrageView.timeInterval = 0.5;
     barrageView.backgroundColor = [UIColor colorWithRed:50/255. green:180/255. blue:255/255. alpha:1];
     barrageView.dataSource = self;
