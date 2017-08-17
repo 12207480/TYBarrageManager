@@ -197,7 +197,7 @@
     NSMutableDictionary *priorityBarrages = [NSMutableDictionary dictionary];
     if (_dataSourceFlags.barragePriorityWithData) {
         for (id barrageData in barrageDatas) {
-            BarragePriority priority = MIN([_dataSource barrageView:self priorityWithBarrageData:barrageData], _barrageRenderCount);
+            BarragePriority priority = MIN([_dataSource barrageView:self priorityWithBarrageData:barrageData], _barrageRenderCount-1);
             
             NSMutableArray *array = [priorityBarrages objectForKey:@(priority)];
             if (!array) {
