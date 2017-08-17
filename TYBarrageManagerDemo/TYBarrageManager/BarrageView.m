@@ -27,10 +27,6 @@
 // UI
 @property (nonatomic, strong) NSArray *renderViews;
 
-// Data
-
-//@property (nonatomic, strong) NSArray *barrageDatas;
-
 @property (nonatomic, strong) NSTimer *timer;
 
 @end
@@ -239,7 +235,7 @@
 
 - (id)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     __block UIView *clickedView = nil;
-    [self.renderViews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(BarrageRenderView *renderView, NSUInteger idx, BOOL * stop) {
+    [_renderViews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(BarrageRenderView *renderView, NSUInteger idx, BOOL * stop) {
         NSArray *subViews = renderView.subviews;
         [subViews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(UIView *subView, NSUInteger idx, BOOL * stop) {
             if([subView isKindOfClass:[BarrageViewCell class]]){ //是要找的图片
