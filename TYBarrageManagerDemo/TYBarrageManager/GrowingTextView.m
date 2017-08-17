@@ -62,7 +62,6 @@
 - (void)setMaxNumOfLines:(NSUInteger)maxNumOfLines
 {
     _maxNumOfLines = maxNumOfLines;
-    
     _maxTextHeight = ceil(self.font.lineHeight * maxNumOfLines + self.textContainerInset.top + self.textContainerInset.bottom);
 }
 
@@ -117,7 +116,6 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
     if (!_placeHolderLabel.hidden) {
         _placeHolderLabel.frame = CGRectMake(_placeHolderEdge.left, _placeHolderEdge.top, CGRectGetWidth(self.frame)-_placeHolderEdge.left- _placeHolderEdge.right, CGRectGetHeight(self.frame) - _placeHolderEdge.top - _placeHolderEdge.bottom);
     }
