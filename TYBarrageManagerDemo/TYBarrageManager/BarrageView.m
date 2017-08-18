@@ -16,7 +16,10 @@
 }
 
 @property (nonatomic, assign) BarrageState state;
+
 @property (nonatomic, assign) NSUInteger barrageRenderCount;
+
+@property (nonatomic, assign) NSInteger countOfNoData;
 
 
 // UI
@@ -52,6 +55,8 @@
 
 - (void)configreBarrageView {
     _timeInterval = 0.6;
+    _countOfNoData = 0;
+    _countOfNoDataWillClearTimer = 5;
     [self addBarrageContentViews];
 }
 
@@ -138,7 +143,13 @@
         }
     }
     
-    if (!haveBarrageDatas) {
+    if (haveBarrageDatas) {
+        _countOfNoData = 0;
+    }else {
+        ++_countOfNoData;
+    }
+    
+    if (_countOfNoData > _countOfNoDataWillClearTimer) {
         [self stopTimer];
         _state = BarrageStateWaiting;
     }

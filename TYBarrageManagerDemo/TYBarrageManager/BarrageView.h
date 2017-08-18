@@ -56,6 +56,9 @@ typedef NS_ENUM(NSUInteger, BarrageState) {
 // 弹幕发送间隔
 @property (nonatomic, assign) NSTimeInterval timeInterval;
 
+// 连续5次没有数据清除定时器
+@property (nonatomic, assign) NSInteger countOfNoDataWillClearTimer;
+
 // 弹幕优先级层
 - (BarrageRenderView *)renderViewWithPriority:(BarragePriority)priority;
 

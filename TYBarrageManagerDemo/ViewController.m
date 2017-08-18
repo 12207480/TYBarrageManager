@@ -71,7 +71,7 @@
         [_barrageView prepareBarrage];
     }
     [_barrageView sendBarrageDatas:_datas];
-    [self startTime];
+    //[self startTime];
 }
 - (IBAction)sendBarrage:(id)sender {
     [self loadData];
