@@ -59,6 +59,9 @@ typedef NS_ENUM(NSUInteger, BarrageState) {
 // 连续5次没有数据清除定时器
 @property (nonatomic, assign) NSInteger countOfNoDataWillClearTimer;
 
+// 所有渲染层
+@property (nonatomic, strong, readonly) NSArray *renderViews;
+
 // 弹幕优先级层
 - (BarrageRenderView *)renderViewWithPriority:(BarragePriority)priority;
 

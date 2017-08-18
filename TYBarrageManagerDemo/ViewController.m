@@ -61,7 +61,7 @@
     for (int i = 0; i < arc4random_uniform(16); ++i) {
         BarrageData *data = [[BarrageData alloc]init];
         data.priority = arc4random_uniform(2);
-        data.text = _texts[arc4random_uniform(_texts.count)];
+        data.text = _texts[arc4random_uniform((uint32_t)_texts.count)];
         [array addObject:data];
     }
     _datas = [array copy];

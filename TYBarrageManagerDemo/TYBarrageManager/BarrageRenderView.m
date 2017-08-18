@@ -30,7 +30,7 @@
 
 @property (nonatomic, assign) BarragePriority priority;
 
-@property (nonatomic, assign)NSInteger channelCount;
+@property (nonatomic, assign) NSInteger channelCount;
 
 @property (nonatomic, strong) NSMutableArray *barrageDatas;
 
@@ -141,7 +141,6 @@
         }
         [self renderBarrageCellData:barrageData channel:channel];
     }];
-
 }
 
 - (void)renderBarrageCellData:(id)barrageData channel:(NSUInteger) channel {
