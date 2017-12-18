@@ -70,7 +70,6 @@
  */
 - (BOOL)haveBarrageDatas;
 
-
 /**
  航道是否被可用
  */
@@ -81,10 +80,20 @@
  */
 - (void)clearBarrage;
 
+
+/**
+ 恢复
+ */
 - (void)resume;
 
+/**
+ 暂停
+ */
 - (void)pause;
 
+/**
+ 停止
+ */
 - (void)stop;
 
 @end
