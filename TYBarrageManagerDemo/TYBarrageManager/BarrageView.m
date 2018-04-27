@@ -15,12 +15,12 @@
     }_dataSourceFlags;
 }
 
+// Data
 @property (nonatomic, assign) BarrageState state;
 
 @property (nonatomic, assign) NSUInteger barrageRenderCount;
 
 @property (nonatomic, assign) NSInteger countOfNoData;
-
 
 // UI
 @property (nonatomic, strong) NSArray *renderViews;
@@ -56,7 +56,7 @@
 - (void)configreBarrageView {
     _timeInterval = 0.6;
     _countOfNoData = 0;
-    _countOfNoDataWillClearTimer = 5;
+    _countOfNoDataWillClearTimer = 6;
     [self addBarrageContentViews];
 }
 
@@ -142,12 +142,7 @@
             haveBarrageDatas = YES;
         }
     }
-    
-    if (haveBarrageDatas) {
-        _countOfNoData = 0;
-    }else {
-        ++_countOfNoData;
-    }
+    _countOfNoData = haveBarrageDatas ? 0 : _countOfNoData+1;
     
     if (_countOfNoData > _countOfNoDataWillClearTimer) {
         [self stopTimer];

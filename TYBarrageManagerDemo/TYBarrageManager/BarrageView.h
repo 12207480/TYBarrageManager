@@ -11,11 +11,11 @@
 
 // 弹幕状态
 typedef NS_ENUM(NSUInteger, BarrageState) {
-    BarrageStateUnPrepare,
-    BarrageStateWaiting,
-    BarrageStateRendering,
-    BarrageStatePauseing,
-    BarrageStateStoped,
+    BarrageStateUnPrepare,  // 未开始
+    BarrageStateWaiting,    // 等待渲染
+    BarrageStateRendering,  // 渲染中
+    BarrageStatePauseing,   // 暂停
+    BarrageStateStoped,     // 停止
 };
 
 @class BarrageView;
@@ -56,7 +56,7 @@ typedef NS_ENUM(NSUInteger, BarrageState) {
 // 弹幕发送间隔
 @property (nonatomic, assign) NSTimeInterval timeInterval;
 
-// 连续5次没有数据清除定时器
+// 连续n次没有数据,清除定时器
 @property (nonatomic, assign) NSInteger countOfNoDataWillClearTimer;
 
 // 所有渲染层
