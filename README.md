@@ -1,0 +1,2 @@
+# TYBarrageManager
+barrage manager view
