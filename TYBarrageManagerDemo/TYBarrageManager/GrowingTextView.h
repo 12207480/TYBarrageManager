@@ -10,7 +10,7 @@
 
 @class GrowingTextView;
 @protocol GrowingTextViewDelegate <NSObject>
-
+@optional
 // 文本高度改变
 - (void)growingTextView:(GrowingTextView *)growingTextView didChangeTextHeight:(CGFloat)textHeight;
 

@@ -35,7 +35,7 @@
 }
 
 - (void)configureInputView {
-    self.scrollEnabled = NO;
+    self.scrollEnabled = ![_growingTextDelegate respondsToSelector:@selector(growingTextView:didChangeTextHeight:)];
     self.scrollsToTop = NO;
     self.showsHorizontalScrollIndicator = NO;
     self.enablesReturnKeyAutomatically = YES;
@@ -84,18 +84,20 @@
     if ([_growingTextDelegate respondsToSelector:@selector(growingTextViewDidChangeText:)]) {
         [_growingTextDelegate growingTextViewDidChangeText:self];
     }
-
+    
+    if (![_growingTextDelegate respondsToSelector:@selector(growingTextView:didChangeTextHeight:)]) {
+        return;
+    }
     CGFloat height = ceilf([self sizeThatFits:CGSizeMake(self.bounds.size.width, MAXFLOAT)].height);
     if (_textHeight != height) { // 高度不一样，就改变了高度
         // 最大高度，可以滚动
         self.scrollEnabled = _maxNumOfLines > 0 && height > _maxTextHeight && _maxTextHeight > 0;
         _textHeight = height;
-        if (!self.scrollEnabled && [_growingTextDelegate respondsToSelector:@selector(growingTextView:didChangeTextHeight:)]) {
+        if (!self.scrollEnabled) {
             [_growingTextDelegate growingTextView:self didChangeTextHeight:height];
         }
     }
 }
-
 
 - (void)layoutSubviews {
     [super layoutSubviews];
